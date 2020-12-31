@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space News App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+
+
+<div class="background" id="vue">
+    <div class="space-app">
+        <!--        View-->
+        <div v-if="!isEditing" class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <a target="_blank" v-bind:href="space.url">
+                        <img v-bind:src="space.thumbnail_url ? space.thumbnail_url : space.url"
+                             style="width:400px;height:400px" alt="Space Fact"></a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ space.title }}</h4>
+                        <p class="card-text">{{ space.explanation }}</p>
+                        <p class="card-text"><small class="text-muted">{{ space.media_type }} by
+                            {{ space.copyright ? space.copyright : space.copyright = 'NASA Api' }}</small></p>
+                        <div class="footer">
+                            <button class="btn btn-success" v-on:click="getSpace()">Get another Fact</button>
+                            <button class="btn btn-info" v-on:click="postSpaceFact()">Add Fact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        Editing-->
+        <div v-else class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <a target="_blank" v-bind:href="spaceFact.url">
+                        <img v-bind:src="spaceFact.url" style="width:400px;height:400px" alt="Space Fact"></a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div>
+
+                                <textarea class="textarea" v-model="spaceFact.title" rows="1">{{spaceFact.title }}</textarea>
+                            </div>
+                            <div>
+                                <textarea class="textarea" v-model="spaceFact.explanation" rows="9">{{spaceFact.explanation }}</textarea>
+                            </div>
+
+                        </form>
+                        <p class="card-text"><small class="text-muted">by {{ spaceFact.copyright }}</small></p>
+                        <div class="footer">
+                            <button class="btn btn-primary" v-on:click="editSpaceFact(spaceFact)">Save Changes</button>
+                            <button class="btn btn-dander" v-on:click="exitEditMode()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+        <h1 style="text-align: center">Saved Facts: </h1>
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr style="text-align: center">
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Explanation</th>
+                <th scope="col">URL</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="spaceFact in spaceFacts" v-bind:key="spaceFact.id">
+                <th scope="row">{{ spaceFact.id }}</th>
+                <td>{{ spaceFact.title }}</td>
+                <td>{{ spaceFact.explanation }}</td>
+                <td><a v-bind:href=spaceFact.url>URL</a></td>
+                <td>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-sm" v-on:click="setSpaceFactToEdit(spaceFact)">Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" v-on:click.prevent="deleteSpaceFact(spaceFact.id)">
+                            Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+</body>
+</html>
+
+
+<script>
+
+
+    const apiURL = "http://localhost:8080/app/space";
+
+
+    new Vue({
+        el: "#vue",
+        data() {
+            return {
+                isEditing: false,
+                space: {
+                    copyright: null,
+                    date: null,
+                    explanation: null,
+                    media_type: null,
+                    service_version: null,
+                    hdurl: null,
+                    thumbnail_url: null,
+                    title: null,
+                    url: null
+                },
+                spaceFact: {
+                    id: null,
+                    copyright: null,
+                    date: null,
+                    explanation: null,
+                    media_type: null,
+                    title: null,
+                    url: null
+                },
+                spaceFacts: null,
+            }
+        },
+
+        mounted() {
+            this.getSpace();
+            this.getSpaceFacts();
+        },
+
+
+        methods: {
+
+            getSpace: function () {
+                axios.get(apiURL).then((res) => {
+                    this.space = res.data;
+                });
+            },
+
+            getSpaceFacts: function () {
+                axios.get(apiURL + '/facts').then((res) => {
+                    this.spaceFacts = res.data;
+                });
+            },
+
+
+            postSpaceFact: function () {
+                axios
+                    .post(apiURL + '/facts', {
+                        "id": this.space.id,
+                        "copyright": this.space.copyright,
+                        "date": this.space.date,
+                        "explanation": this.space.explanation,
+                        "title": this.space.title,
+                        "url": this.space.url,
+                    }).then((res) => {
+                    console.log(res.data);
+                    this.getSpaceFacts();
+                    this.space.id = null,
+                    this.space.date = null,
+                    this.space.copyright = null,
+                    this.space.explanation = null,
+                    this.space.title = null,
+                    this.space.url = null,
+                    this.space.thumbnail_url = null,
+                    this.getSpace()
+                });
+            },
+
+            deleteSpaceFact: function (id) {
+                axios.delete(apiURL + '/facts/' + id).then((res) => {
+                    console.log(res.data);
+                    this.getSpaceFacts();
+                });
+            },
+
+            setSpaceFactToEdit: function (spaceFact) {
+                this.isEditing = true;
+                this.spaceFact = spaceFact;
+
+            },
+
+            exitEditMode: function () {
+                this.isEditing = false;
+                this.spaceFact = null;
+
+            },
+
+
+            editSpaceFact: function () {
+                axios
+                    .put(apiURL + '/facts/', {
+                        "id": this.spaceFact.id,
+                        "copyright": this.spaceFact.copyright,
+                        "date": this.spaceFact.date,
+                        "explanation": this.spaceFact.explanation,
+                        "title": this.spaceFact.title,
+                        "url": this.spaceFact.url,
+                    }).then((res) => {
+                    console.log(res.data);
+                    this.exitEditMode();
+                    this.getSpace();
+                    this.getSpaceFacts();
+
+                });
+            },
+        },
+    });
+
+
+</script>
+
+
+<style>
+
+    .space-app {
+        background: #FFF;
+        padding: 1rem;
+        border-radius: 50px 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+        width: 97%;
+        height: 95%;
+        max-width: 1400px;
+        max-height: 600px;
+        margin: auto;
+        position: relative;
+
+    }
+
+    .background {
+        background-image: url("https://wallpaperaccess.com/full/137910.jpg");
+        background-color: #cccccc;
+        padding: 2rem;
+        margin: 1rem;
+        height: auto;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-size: auto;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        margin: 2px;
+        right: 3rem;
+
+    }
+
+    img {
+        border: 1px solid #ddd;
+        border-radius: 50px 20px;
+        padding: 4px;
+        height: 300px;
+    }
+
+    img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
+
+    h1 {
+        margin-bottom: 1%;
+        color: snow;
+    }
+
+    .table-btn-section {
+        margin: 0;
+        position: center;
+        top: 50%;
+        left: 50%;
+    }
+
+    .textarea {
+        width: 800px;
+    }
+
+    .btn-danger {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+</style>
+
+
+
