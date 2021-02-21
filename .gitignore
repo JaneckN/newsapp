@@ -1,8 +1,18 @@
 HELP.md
 target/
+node_modules/
+.mvn/wrapper/maven-wrapper.jar
+.git.bfg-report
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+mvnw
+mvnw.cmd
+.gitignore
+package-lock.json
+package.json 
+
 
 ### STS ###
 .apt_generated
