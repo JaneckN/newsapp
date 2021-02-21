@@ -35,7 +35,7 @@ public class SpaceFactController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpaceFact> getCarById(@PathVariable long id) {
+    public ResponseEntity<SpaceFact> getSpaceFactById(@PathVariable long id) {
         Optional<SpaceFact> spaceFact = spaceFactService.getSpaceFactById(id);
         if (spaceFact.isPresent()) {
             return new ResponseEntity<>(spaceFact.get(), HttpStatus.OK);
