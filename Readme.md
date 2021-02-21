@@ -1,5 +1,5 @@
 # Full-stack Spring-boot and Vue.js App.
-#### SpringBoot,  JDBC-Template with remote MySQL DB, VueJS, Axios and Boostrap
+#### SpringBoot, RestTemplate, JDBC-Template with remote MySQL DB, VueJS, Axios and Boostrap
 In this app I use NASA's Astronomy Picture of the Day (APOD) service (https://api.nasa.gov/planetary/apod).
 Spaceapp is a simple app that allows you to browse Astronomy Picture of the Day, you can save a photo with explanation in database (edit and delete too).
 I use https://www.freemysqlhosting.net/ to set my remote DB.
