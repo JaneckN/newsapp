@@ -18,7 +18,7 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping("/app/space/facts")
+@RequestMapping("/app/v2/space/facts")
 public class SpaceFactController {
 
 

@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping("/app/space")
+@RequestMapping("/app/v2/space")
 public class SpaceController {
 
     private final SpaceService spaceService;
