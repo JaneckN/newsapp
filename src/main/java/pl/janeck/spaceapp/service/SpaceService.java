@@ -21,7 +21,7 @@ public class SpaceService {
 
     @Value("${api.key}")
     private String API_KEY;
-    private final String API_URL = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&count=1&thumbs=true";
+    private String API_URL = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&count=1&thumbs=true";
     private final RestTemplate restTemplate;
 
 
