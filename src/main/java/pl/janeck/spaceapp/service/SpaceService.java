@@ -18,10 +18,8 @@ import java.util.Optional;
  */
 
 @Service
-@PropertySource("/api.properties")
 public class SpaceService {
 
-    @Value("${api.key}")
     private final String API_KEY = "Ah8aaL6ZpEJgo59VTfu6iH5Hx4uJAB3m5dhxaTeA";
     private final String API_URL = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&count=1&thumbs=true";
     private final RestTemplate restTemplate;
