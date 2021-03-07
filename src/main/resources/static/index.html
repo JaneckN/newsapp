@@ -102,13 +102,10 @@
 
 <script>
 
-     const apiURL = "http://localhost:8080/app/v2/space";
-    //const apiURL = "https://spaceapp-springboot-vue.herokuapp.com/app/v2/space";
-
-
+    var _0x3772 = ["\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x70\x61\x63\x65\x61\x70\x70\x2D\x73\x70\x72\x69\x6E\x67\x62\x6F\x6F\x74\x2D\x76\x75\x65\x2E\x68\x65\x72\x6F\x6B\x75\x61\x70\x70\x2E\x63\x6F\x6D\x2F\x61\x70\x70\x2F\x76\x32\x2F\x73\x70\x61\x63\x65", "\x23\x76\x75\x65", "\x67\x65\x74\x53\x70\x61\x63\x65", "\x67\x65\x74\x53\x70\x61\x63\x65\x46\x61\x63\x74\x73", "\x73\x70\x61\x63\x65", "\x64\x61\x74\x61", "\x74\x68\x65\x6E", "\x67\x65\x74", "\x73\x70\x61\x63\x65\x46\x61\x63\x74\x73", "\x2F\x66\x61\x63\x74\x73", "\x6C\x6F\x67", "\x69\x64", "\x64\x61\x74\x65", "\x63\x6F\x70\x79\x72\x69\x67\x68\x74", "\x65\x78\x70\x6C\x61\x6E\x61\x74\x69\x6F\x6E", "\x74\x69\x74\x6C\x65", "\x75\x72\x6C", "\x74\x68\x75\x6D\x62\x6E\x61\x69\x6C\x5F\x75\x72\x6C", "\x70\x6F\x73\x74", "\x2F\x66\x61\x63\x74\x73\x2F", "\x64\x65\x6C\x65\x74\x65", "\x69\x73\x45\x64\x69\x74\x69\x6E\x67", "\x73\x70\x61\x63\x65\x46\x61\x63\x74", "\x65\x78\x69\x74\x45\x64\x69\x74\x4D\x6F\x64\x65", "\x70\x75\x74"];
+    const apiURL = _0x3772[0];
     new Vue({
-        el: "#vue",
-        data() {
+        el: _0x3772[1], data: function () {
             return {
                 isEditing: false,
                 space: {
@@ -131,94 +128,61 @@
                     title: null,
                     url: null
                 },
-                spaceFacts: null,
+                spaceFacts: null
             }
-        },
-
-        mounted() {
-            this.getSpace();
-            this.getSpaceFacts();
-        },
-
-
-        methods: {
-
+        }, mounted: function () {
+            this[_0x3772[2]]();
+            this[_0x3772[3]]()
+        }, methods: {
             getSpace: function () {
-                axios.get(apiURL).then((res) => {
-                    this.space = res.data;
-                });
-            },
-
-            getSpaceFacts: function () {
-                axios.get(apiURL + '/facts').then((res) => {
-                    this.spaceFacts = res.data;
-                });
-            },
-
-
-            postSpaceFact: function () {
-                axios
-                    .post(apiURL + '/facts', {
-                        "id": this.space.id,
-                        "copyright": this.space.copyright,
-                        "date": this.space.date,
-                        "explanation": this.space.explanation,
-                        "title": this.space.title,
-                        "url": this.space.url,
-                    }).then((res) => {
-                    console.log(res.data);
-                    this.getSpaceFacts();
-                    this.space.id = null,
-                        this.space.date = null,
-                        this.space.copyright = null,
-                        this.space.explanation = null,
-                        this.space.title = null,
-                        this.space.url = null,
-                        this.space.thumbnail_url = null,
-                        this.getSpace()
-                });
-            },
-
-            deleteSpaceFact: function (id) {
-                axios.delete(apiURL + '/facts/' + id).then((res) => {
-                    console.log(res.data);
-                    this.getSpaceFacts();
-                });
-            },
-
-            setSpaceFactToEdit: function (spaceFact) {
-                this.isEditing = true;
-                this.spaceFact = spaceFact;
-
-            },
-
-            exitEditMode: function () {
-                this.isEditing = false;
-                this.spaceFact = null;
-
-            },
-
-
-            editSpaceFact: function () {
-                axios
-                    .put(apiURL + '/facts/', {
-                        "id": this.spaceFact.id,
-                        "copyright": this.spaceFact.copyright,
-                        "date": this.spaceFact.date,
-                        "explanation": this.spaceFact.explanation,
-                        "title": this.spaceFact.title,
-                        "url": this.spaceFact.url,
-                    }).then((res) => {
-                    console.log(res.data);
-                    this.exitEditMode();
-                    this.getSpace();
-                    this.getSpaceFacts();
-
-                });
-            },
-        },
-    });
-
+                axios[_0x3772[7]](apiURL)[_0x3772[6]]((_0xfad5x2) => {
+                    this[_0x3772[4]] = _0xfad5x2[_0x3772[5]]
+                })
+            }, getSpaceFacts: function () {
+                axios[_0x3772[7]](apiURL + _0x3772[9])[_0x3772[6]]((_0xfad5x2) => {
+                    this[_0x3772[8]] = _0xfad5x2[_0x3772[5]]
+                })
+            }, postSpaceFact: function () {
+                axios[_0x3772[18]](apiURL + _0x3772[9], {
+                    "\x69\x64": this[_0x3772[4]][_0x3772[11]],
+                    "\x63\x6F\x70\x79\x72\x69\x67\x68\x74": this[_0x3772[4]][_0x3772[13]],
+                    "\x64\x61\x74\x65": this[_0x3772[4]][_0x3772[12]],
+                    "\x65\x78\x70\x6C\x61\x6E\x61\x74\x69\x6F\x6E": this[_0x3772[4]][_0x3772[14]],
+                    "\x74\x69\x74\x6C\x65": this[_0x3772[4]][_0x3772[15]],
+                    "\x75\x72\x6C": this[_0x3772[4]][_0x3772[16]]
+                })[_0x3772[6]]((_0xfad5x2) => {
+                    console[_0x3772[10]](_0xfad5x2[_0x3772[5]]);
+                    this[_0x3772[3]]();
+                    this[_0x3772[4]][_0x3772[11]] = null, this[_0x3772[4]][_0x3772[12]] = null, this[_0x3772[4]][_0x3772[13]] = null, this[_0x3772[4]][_0x3772[14]] = null, this[_0x3772[4]][_0x3772[15]] = null, this[_0x3772[4]][_0x3772[16]] = null, this[_0x3772[4]][_0x3772[17]] = null, this[_0x3772[2]]()
+                })
+            }, deleteSpaceFact: function (_0xfad5x3) {
+                axios[_0x3772[20]](apiURL + _0x3772[19] + _0xfad5x3)[_0x3772[6]]((_0xfad5x2) => {
+                    console[_0x3772[10]](_0xfad5x2[_0x3772[5]]);
+                    this[_0x3772[3]]()
+                })
+            }, setSpaceFactToEdit: function (_0xfad5x4) {
+                this[_0x3772[21]] = true;
+                this[_0x3772[22]] = _0xfad5x4
+            }, exitEditMode: function () {
+                this[_0x3772[21]] = false;
+                this[_0x3772[22]] = null
+            }, editSpaceFact: function () {
+                axios[_0x3772[24]](apiURL + _0x3772[19], {
+                    "\x69\x64": this[_0x3772[22]][_0x3772[11]],
+                    "\x63\x6F\x70\x79\x72\x69\x67\x68\x74": this[_0x3772[22]][_0x3772[13]],
+                    "\x64\x61\x74\x65": this[_0x3772[22]][_0x3772[12]],
+                    "\x65\x78\x70\x6C\x61\x6E\x61\x74\x69\x6F\x6E": this[_0x3772[22]][_0x3772[14]],
+                    "\x74\x69\x74\x6C\x65": this[_0x3772[22]][_0x3772[15]],
+                    "\x75\x72\x6C": this[_0x3772[22]][_0x3772[16]]
+                })[_0x3772[6]]((_0xfad5x2) => {
+                    console[_0x3772[10]](_0xfad5x2[_0x3772[5]]);
+                    this[_0x3772[23]]();
+                    this[_0x3772[2]]();
+                    this[_0x3772[3]]()
+                })
+            }
+        }
+    })
 
 </script>
 
