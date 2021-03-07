@@ -17,13 +17,15 @@ you can save, edit and remove a Space Fact in a remote database (MySQL + jdbcTem
 
 <br/>
 <br/>
-:point_right: To Try this app go to : https://spaceapp-springboot-vue.herokuapp.com/  :point_left:
+
+<h1 align="center"> To get live demo links , please drop me an email on:</h1> 
+<p align="center"> <a href="mailto:janeck@protonmail.com">
+<img src="https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white"/></a>
 <br/>
 <br/>
-
-![alt text](https://i.postimg.cc/d1QvZLDZ/space.png)
-
-
+<img src="https://i.postimg.cc/d1QvZLDZ/space.png">
+<br/>
+</p>
 
 
 
