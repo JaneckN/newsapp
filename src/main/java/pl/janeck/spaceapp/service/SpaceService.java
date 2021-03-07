@@ -2,6 +2,7 @@ package pl.janeck.spaceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.janeck.spaceapp.model.Space;
@@ -17,11 +18,12 @@ import java.util.Optional;
  */
 
 @Service
+@PropertySource("/api.properties")
 public class SpaceService {
 
     @Value("${api.key}")
-    private String API_KEY;
-    private String API_URL = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&count=1&thumbs=true";
+    private final String API_KEY = "Ah8aaL6ZpEJgo59VTfu6iH5Hx4uJAB3m5dhxaTeA";
+    private final String API_URL = "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&count=1&thumbs=true";
     private final RestTemplate restTemplate;
 
 
