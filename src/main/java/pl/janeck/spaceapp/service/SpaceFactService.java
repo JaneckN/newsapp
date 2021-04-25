@@ -34,7 +34,7 @@ public class SpaceFactService {
         return spaceFactDao.findById(id);
     }
 
-    public Optional<SpaceFact> removeCar(long id) {
+    public Optional<SpaceFact> removeSpaceFact(long id) {
         Optional<SpaceFact> spaceFactToRemove = spaceFactDao.findById(id);
         if (spaceFactToRemove.isPresent()) {
             spaceFactDao.deleteSpaceFact(spaceFactToRemove.get().getId());

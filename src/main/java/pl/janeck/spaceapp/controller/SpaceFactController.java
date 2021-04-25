@@ -55,7 +55,7 @@ public class SpaceFactController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<SpaceFact> removeSpaceFact(@PathVariable long id) {
-        Optional<SpaceFact> spaceFact = spaceFactService.removeCar(id);
+        Optional<SpaceFact> spaceFact = spaceFactService.removeSpaceFact(id);
         if (!spaceFact.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -63,7 +63,7 @@ public class SpaceFactController {
     }
 
     @PutMapping
-    public ResponseEntity<SpaceFact> updateCar(@RequestBody SpaceFact spaceFactToUpdate) {
+    public ResponseEntity<SpaceFact> updateSpaceFact(@RequestBody SpaceFact spaceFactToUpdate) {
         Optional<SpaceFact> spaceFact = spaceFactService.updateSpaceFact(spaceFactToUpdate);
         if (spaceFact.isPresent()) {
             return new ResponseEntity<>(spaceFact.get(), HttpStatus.OK);
